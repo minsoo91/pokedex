@@ -1,0 +1,74 @@
+<script type="text/template" id="pokemon-list-item-template">
+  <li class="poke-list-item" data-id='<%%= pokemon.get('id') %>' >
+    <%% var shortInfo = ['name', 'poke_type'] %>
+    <%% shortInfo.forEach(function (attr) { %>
+      <%%= attr %>: <%%= pokemon.get(attr)  %>
+      <br>
+    <%% }) %>
+  </li>
+</script>
+
+<script type="text/template" id="pokemon-detail-template">
+  <div class="detail">
+    <%%= "<img src='" + pokemon.escape('image_url') + "'></img>" %>
+    <ul>
+      <%% for (var attr in pokemon.attributes) { %>
+         <li><%%= attr %>: <%%= pokemon.get(attr) %></li>
+      <%% } %>
+    </ul>
+    <ul class="toys">
+    </ul>
+  </div>
+</script>
+
+<script type="text/template" id="toy-list-item-template">
+  <li class="toy-list-item" 
+      data-id='<%%= toy.get('id') %>' 
+      data-pokemon-id='<%%= toy.get('pokemon_id') %>' >
+      <%% var shortInfo = ['name', 'happiness', 'price'] %>
+      <%% shortInfo.forEach(function (attr) { %>
+        <%%= attr %>: <%%= toy.get(attr)  %>
+        <br>
+      <%% }) %>
+  </li>
+</script>
+
+    <!-- t.integer  "pokemon_id", null: false
+    t.string   "name",       null: false
+    t.integer  "price",      null: false
+    t.integer  "happiness",  null: false
+    t.string   "image_url",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at" -->
+
+<script type="text/template" id="toy-detail-template">
+  <div class="toy-detail">
+    <%%= "<img src='" + toy.escape('image_url') + "'></img>" %>
+    <ul>
+      <%% for (var attr in toy.attributes) { %>
+         <%% if(attr !== 'pokemon_id' && attr !== 'image_url') { %>
+            <li><%%= attr %>: <%%= toy.get(attr) %></li>
+        <%% } %>
+      <%% } %>
+    </ul>
+    
+
+  </div>
+  
+
+</script>
+
+   <!-- <select data-pokemon-id="<%%= toy.get('pokemon_id') %>"
+           data-toy-id="<%%= toy.get('id')%>"
+   >
+           <%% pokes.each(function (pokemon) { %>
+             <option value='<%%= pokemon.id %>'
+               <%% if (pokemon.id == toy.get('pokemon_id')) { %>
+                 selected
+               <%% } %>
+             >
+
+             <%%= pokemon.get("name") %>
+             </option>
+           <%% }) %>
+   </select> -->
